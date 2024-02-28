@@ -13,7 +13,7 @@ public class EnemyAI : MonoBehaviour
 
     void Awake() 
     {
-        enemyVisionCollider = GetComponent<PolygonCollider2D>();
+        enemyVisionCollider = GetComponentInChildren<PolygonCollider2D>();
         enemySpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
