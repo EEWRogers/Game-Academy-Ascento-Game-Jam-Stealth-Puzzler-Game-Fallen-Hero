@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D playerRigidbody;
     Animator playerAnimator;
+    bool playerHasHorizontalVelocity;
+
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction interactAction;
@@ -38,28 +40,48 @@ public class PlayerController : MonoBehaviour
         Vector2 inputVector = moveAction.ReadValue<Vector2>();
         Vector2 currentMovementVector = new Vector2(inputVector.x * movementSpeed, inputVector.y * movementSpeed);
 
-        SetMovementAnimation(currentMovementVector);
+        SetMovementAnimation();
         playerRigidbody.velocity = currentMovementVector;
     }
 
-    void SetMovementAnimation(Vector2 currentMovementVector)
+    void SetMovementAnimation()
     {
-        if (currentMovementVector.x == 0 && currentMovementVector.y == 0)
+        if (playerRigidbody.velocity.x == 0 && playerRigidbody.velocity.y == 0)
         {
             playerAnimator.SetBool("SRun", false);
             playerAnimator.SetBool("WRun", false);
+            playerAnimator.SetBool("HorizontalRun", false);
         }
 
-        if (currentMovementVector.y < 0)
+        if (playerRigidbody.velocity.y < 0)
         {
             playerAnimator.SetBool("SRun", true);
             playerAnimator.SetBool("WRun", false);
+            playerAnimator.SetBool("HorizontalRun", false);
         }
 
-        if (currentMovementVector.y > 0)
+        if (playerRigidbody.velocity.y > 0)
         {
             playerAnimator.SetBool("WRun", true);
             playerAnimator.SetBool("SRun", false);
+            playerAnimator.SetBool("HorizontalRun", false);
+        }
+
+        if (Mathf.Abs(playerRigidbody.velocity.x) > Mathf.Epsilon)
+        {
+            playerAnimator.SetBool("HorizontalRun", true);
+
+            FlipPlayerSprite();
+        }
+    }
+
+    void FlipPlayerSprite()
+    {
+        playerHasHorizontalVelocity = Mathf.Abs(playerRigidbody.velocity.x) > Mathf.Epsilon;
+
+        if (playerHasHorizontalVelocity)
+        {
+            gameObject.transform.localScale = new Vector2 (Mathf.Sign(playerRigidbody.velocity.x), 1f);
         }
     }
 
