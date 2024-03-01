@@ -269,6 +269,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: LevelBorderPlaceholder-sheet_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8608806d8063d61449f5a53d19063a4c
+      internalID: 334595413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LevelBorderPlaceholder-sheet_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff59c1552d967b44abdcc8e7afaaea4b
+      internalID: 1540437073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -287,6 +329,8 @@ TextureImporter:
       LevelBorderPlaceholder-sheet_4: 1239451157
       LevelBorderPlaceholder-sheet_5: -1320978435
       LevelBorderPlaceholder-sheet_6: -1375691757
+      LevelBorderPlaceholder-sheet_7: 334595413
+      LevelBorderPlaceholder-sheet_8: 1540437073
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
