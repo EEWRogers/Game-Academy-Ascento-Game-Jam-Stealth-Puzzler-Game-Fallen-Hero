@@ -8,8 +8,9 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] LayerMask whatToLookFor;
     [SerializeField] PatrolPath patrolPath;
-    [SerializeField] float waypointTolerance = 1f;
-    [SerializeField] float guardSpeed = 0.5f;
+    [SerializeField] float waypointTolerance = 0.2f;
+    [SerializeField] float guardSpeed = 1.2f;
+    [SerializeField] float rotationSpeed = 10f;
     PolygonCollider2D enemyVisionCollider;
     SpriteRenderer enemySpriteRenderer;
     Transform enemyCentreTransform;
@@ -58,14 +59,21 @@ public class EnemyAI : MonoBehaviour
         return distanceToWaypoint < waypointTolerance;
     }
 
-    void MoveToLocation(Vector2 destination)
+    void MoveToLocation(Vector3 destination)
     {
         transform.position = Vector2.MoveTowards(transform.position, destination, guardSpeed * Time.deltaTime);
+        RotateViewTowardsDestination(destination);
     }
 
-    void RotateViewTowardsDestination()
+    void RotateViewTowardsDestination(Vector3 destination)
     {
-        
+        Vector3 vectorToTarget = destination - enemyCentreTransform.position;
+
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotationSpeed);
     }
 
     void OnTriggerEnter2D(Collider2D other) 

@@ -29,7 +29,7 @@ public class PatrolPath : MonoBehaviour
         return i + 1;
     }
 
-    public Vector2 GetWaypointPosition(int i)
+    public Vector3 GetWaypointPosition(int i)
     {
         return transform.GetChild(i).position;
     }
