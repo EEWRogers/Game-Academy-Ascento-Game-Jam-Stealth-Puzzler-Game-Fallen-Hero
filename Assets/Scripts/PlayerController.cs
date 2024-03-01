@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     Animator playerAnimator;
     bool playerHasHorizontalVelocity;
 
+    bool playerIsInputtingMovement = false;
+    bool isPushingBlock = false;
+
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction interactAction;
@@ -92,4 +95,5 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Interacting!");
         }
     }
+    
 }
