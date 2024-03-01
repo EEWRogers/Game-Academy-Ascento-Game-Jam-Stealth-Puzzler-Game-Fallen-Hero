@@ -78,7 +78,7 @@ public class EnemyAI : MonoBehaviour
 
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotationSpeed);
+        enemyCentreTransform.rotation = Quaternion.Slerp(enemyCentreTransform.rotation, q, Time.deltaTime * rotationSpeed);
     }
 
     void OnTriggerEnter2D(Collider2D other) 
