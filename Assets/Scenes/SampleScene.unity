@@ -5070,6 +5070,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1213752136}
     - target: {fileID: 1887867276343325339, guid: 20462f42b0f08ad43b562aecb455918d, type: 3}
+      propertyPath: rotationSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887867276343325339, guid: 20462f42b0f08ad43b562aecb455918d, type: 3}
       propertyPath: waypointTolerance
       value: 0.2
       objectReference: {fileID: 0}

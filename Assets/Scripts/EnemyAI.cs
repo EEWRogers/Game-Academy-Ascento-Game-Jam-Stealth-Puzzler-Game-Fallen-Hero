@@ -8,8 +8,10 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] LayerMask whatToLookFor;
     [SerializeField] PatrolPath patrolPath;
+    [SerializeField] PlayerController player;
     [SerializeField] float waypointTolerance = 0.2f;
-    [SerializeField] float guardSpeed = 1.2f;
+    [SerializeField] float patrolSpeed = 1.2f;
+    [SerializeField] float chaseSpeed = 3f;
     [SerializeField] float rotationSpeed = 10f;
     PolygonCollider2D enemyVisionCollider;
     SpriteRenderer enemySpriteRenderer;
@@ -23,6 +25,7 @@ public class EnemyAI : MonoBehaviour
         enemyVisionCollider = GetComponentInChildren<PolygonCollider2D>();
         enemySpriteRenderer = GetComponent<SpriteRenderer>();
         enemyCentreTransform = transform.GetChild(0).transform;
+        player = FindObjectOfType<PlayerController>();
     }
 
     void Update() 
@@ -30,15 +33,17 @@ public class EnemyAI : MonoBehaviour
         if (playerSeen)
         {
             enemySpriteRenderer.color = Color.green;
+
+            MoveToLocation(player.transform.position, chaseSpeed);
         }
 
-        if (patrolPath != null)
+        if (patrolPath != null && !playerSeen)
         {
             if (AtWaypoint())
             {
                 GetNextWaypoint();
             }
-            MoveToLocation(GetCurrentWaypoint());
+            MoveToLocation(GetCurrentWaypoint(), patrolSpeed);
         }
 
     }
@@ -59,9 +64,9 @@ public class EnemyAI : MonoBehaviour
         return distanceToWaypoint < waypointTolerance;
     }
 
-    void MoveToLocation(Vector3 destination)
+    void MoveToLocation(Vector3 destination, float speed)
     {
-        transform.position = Vector2.MoveTowards(transform.position, destination, guardSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, destination, speed * Time.deltaTime);
         RotateViewTowardsDestination(destination);
     }
 
