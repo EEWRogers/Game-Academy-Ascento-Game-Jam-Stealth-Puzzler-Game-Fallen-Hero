@@ -1,17 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PushBox : MonoBehaviour
 {
+    [SerializeField] float speed = 10f;
     bool beingPushed = false;
+    Vector3 destination;
+    Vector3 direction;
     ColliderSide sideBeingPushed = ColliderSide.NONE;
 
     void Update() 
     {
         CheckWhichSideBeingPushed();
-        Debug.Log(sideBeingPushed);
+
+        SetDirectionOfPush();
+        
+        MoveToDestination();
     }
 
     void CheckWhichSideBeingPushed()
@@ -26,6 +33,51 @@ public class PushBox : MonoBehaviour
             {
                 sideBeingPushed = currentSide.ColliderSide;
             }
+        }
+    }
+
+    void SetDirectionOfPush()
+    {
+        switch (sideBeingPushed)
+        {
+            case ColliderSide.TOP:
+            direction = Vector3.down;
+            break;
+
+            case ColliderSide.LEFT:
+            direction = Vector3.right;
+            break;
+
+            case ColliderSide.RIGHT:
+            direction = Vector3.left;
+            break;
+
+            case ColliderSide.BOTTOM:
+            direction = Vector3.up;
+            break;
+        }
+    }
+
+    void MoveToDestination()
+    {
+        if (Vector3.Distance(transform.position, destination) < Mathf.Epsilon)
+        {
+            transform.position = destination;
+            beingPushed = false;
+        }
+
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+        }
+    }
+
+    public void Push()
+    {
+        if (!beingPushed)
+        {
+            destination = transform.position + direction;
+            beingPushed = true;
         }
     }
 
