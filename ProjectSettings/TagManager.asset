@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - Objects
+  - PushableObject
   - 
   - 
   - 
@@ -55,6 +55,9 @@ TagManager:
     locked: 0
   - name: Objects
     uniqueID: 1638620079
+    locked: 0
+  - name: Unwalkable
+    uniqueID: 3635775253
     locked: 0
   - name: Foreground
     uniqueID: 3458205649

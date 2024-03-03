@@ -15,9 +15,7 @@ public class PushBox : MonoBehaviour
     void Update() 
     {
         CheckWhichSideBeingPushed();
-
         SetDirectionOfPush();
-        
         MoveToDestination();
     }
 
@@ -74,11 +72,8 @@ public class PushBox : MonoBehaviour
 
     public void Push()
     {
-        if (!beingPushed)
-        {
-            destination = transform.position + direction;
-            beingPushed = true;
-        }
+        destination = transform.position + direction;
+        
     }
 
 }

@@ -98,9 +98,9 @@ public class PlayerController : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D other) 
     {
-        if (other.gameObject.GetComponent<PushBox>() != null)
+        if (other.gameObject.GetComponentInParent<PushBox>() != null)
         {
-            other.gameObject.GetComponent<PushBox>().Push();
+            other.gameObject.GetComponentInParent<PushBox>().Push();
         }
     }
 
