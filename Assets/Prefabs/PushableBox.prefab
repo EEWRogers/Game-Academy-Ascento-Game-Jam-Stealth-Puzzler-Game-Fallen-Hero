@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9145649957720407238}
   - component: {fileID: 3532020600202910359}
   - component: {fileID: 7139829762806579994}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: TopCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ MonoBehaviour:
   speed: 10
   whatToLookFor:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
 --- !u!50 &5294590130900150322
 Rigidbody2D:
   serializedVersion: 4
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 6459775115030473639}
   - component: {fileID: 7673793505760009746}
   - component: {fileID: 1582880961425407360}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: BottomCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 4690910111109620065}
   - component: {fileID: 1407364577169796716}
   - component: {fileID: 1042340848277275607}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: RightCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 5319371738293344397}
   - component: {fileID: 3234941313053761524}
   - component: {fileID: 6934684051976772676}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: LeftCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
