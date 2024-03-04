@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction interactAction;
+    InputAction quitAction;
 
     bool canMove = true;
     
@@ -41,6 +42,17 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         interactAction = playerInput.actions["Interact"];
+        quitAction = playerInput.actions["Quit"];
+    }
+
+    void OnEnable() 
+    {
+        quitAction.performed += Quit;
+    }
+
+    void OnDisable() 
+    {
+        quitAction.performed -= Quit;
     }
 
     void Update() 
@@ -52,7 +64,6 @@ public class PlayerController : MonoBehaviour
         Interact();
         SetAnimation();
 
-        Debug.Log(currentAnimationState);
     }
 
     void Move()
@@ -130,4 +141,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Quit(InputAction.CallbackContext context)
+    {
+        Application.Quit();
+    }
 }

@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    guid: 08bac6a28072ac740a7bf7e67134df9f
+  - enabled: 1
+    path: Assets/Scenes/Level1 - Prison.unity
+    guid: 84795f383c1e8bd44af6d8724fe59b2b
   m_configObjects: {}
