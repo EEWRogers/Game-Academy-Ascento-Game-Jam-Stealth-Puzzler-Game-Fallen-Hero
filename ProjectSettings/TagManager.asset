@@ -47,6 +47,9 @@ TagManager:
   - name: Level
     uniqueID: 929267931
     locked: 0
+  - name: Switches
+    uniqueID: 796293151
+    locked: 0
   - name: Player
     uniqueID: 2482341537
     locked: 0
