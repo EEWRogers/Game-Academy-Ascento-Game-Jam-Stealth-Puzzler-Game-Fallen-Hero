@@ -10,6 +10,7 @@ using UnityEngine.Scripting.APIUpdating;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 10f;
+    [SerializeField] Dialogue currentSceneDialogue;
 
     Rigidbody2D playerRigidbody;
     Animator playerAnimator;
@@ -89,7 +90,7 @@ public class PlayerController : MonoBehaviour
     {
         if (interactAction.triggered)
         {
-            Debug.Log("Interacting!");
+            currentSceneDialogue.SkipLine();
         }
     }
 
