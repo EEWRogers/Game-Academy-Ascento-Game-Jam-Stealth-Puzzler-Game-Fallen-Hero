@@ -7,16 +7,23 @@ using UnityEngine;
 public class PushBox : MonoBehaviour
 {
     [SerializeField] float speed = 10f;
-    bool beingPushed = false;
-    Vector3 destination;
+    [SerializeField] LayerMask whatToLookFor;
     Vector3 direction;
+    Vector3 destination;
+    bool beingPushed = false;
     ColliderSide sideBeingPushed = ColliderSide.NONE;
 
     void Update() 
     {
         CheckWhichSideBeingPushed();
         SetDirectionOfPush();
-        MoveToDestination();
+
+        if (CheckMovingDirectionNotBlocked(direction))
+        {
+            MoveToDestination();
+        }
+
+        Debug.Log(direction);
     }
 
     void CheckWhichSideBeingPushed()
@@ -53,11 +60,31 @@ public class PushBox : MonoBehaviour
             case ColliderSide.BOTTOM:
             direction = Vector3.up;
             break;
+
+            case ColliderSide.NONE:
+            direction = Vector3.zero;
+            break;
         }
+    }
+
+    bool CheckMovingDirectionNotBlocked(Vector3 direction)
+    {
+        if (Physics2D.Raycast(transform.position, direction, 1f, whatToLookFor))
+        {
+            return false;
+        }
+
+        return true;
+
     }
 
     void MoveToDestination()
     {
+        if (!beingPushed)
+        {
+            destination = transform.position + direction;
+        }
+
         if (Vector3.Distance(transform.position, destination) < Mathf.Epsilon)
         {
             transform.position = destination;
@@ -66,14 +93,9 @@ public class PushBox : MonoBehaviour
 
         else
         {
+            beingPushed = true;
             transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
         }
-    }
 
-    public void Push()
-    {
-        destination = transform.position + direction;
-        
     }
-
 }

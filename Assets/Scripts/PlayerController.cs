@@ -15,9 +15,6 @@ public class PlayerController : MonoBehaviour
     Animator playerAnimator;
     bool playerHasHorizontalVelocity;
 
-    bool playerIsInputtingMovement = false;
-    bool isPushingBlock = false;
-
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction interactAction;
@@ -93,14 +90,6 @@ public class PlayerController : MonoBehaviour
         if (interactAction.triggered)
         {
             Debug.Log("Interacting!");
-        }
-    }
-    
-    void OnCollisionEnter2D(Collision2D other) 
-    {
-        if (other.gameObject.GetComponentInParent<PushBox>() != null)
-        {
-            other.gameObject.GetComponentInParent<PushBox>().Push();
         }
     }
 
