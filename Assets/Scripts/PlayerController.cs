@@ -11,16 +11,27 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 10f;
     [SerializeField] Dialogue currentSceneDialogue;
-
     Rigidbody2D playerRigidbody;
+
+    //animation related components
     Animator playerAnimator;
+    string currentAnimationState;
     bool playerHasHorizontalVelocity;
+
+    // animation states
+    const string PLAYER_IDLE_DOWN = "IdleDown";
+    const string PLAYER_BLINK_DOWN = "BlinkDown";
+    const string PLAYER_RUN_DOWN = "RunDown";
+    const string PLAYER_IDLE_HORIZONTAL = "IdleHorizontal";
+    const string PLAYER_BLINK_HORIZONTAL = "BlinkHorizontal";
+    const string PLAYER_RUN_HORIZONTAL = "RunHorizontal";
+    const string PLAYER_IDLE_UP = "IdleUp";
+    const string PLAYER_RUN_UP = "RunUp";
 
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction interactAction;
     
-
     void Awake() 
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
@@ -34,6 +45,9 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Interact();
+        SetAnimation();
+
+        Debug.Log(currentAnimationState);
     }
 
     void Move()
@@ -41,49 +55,53 @@ public class PlayerController : MonoBehaviour
         Vector2 inputVector = moveAction.ReadValue<Vector2>();
         Vector2 currentMovementVector = new Vector2(inputVector.x * movementSpeed, inputVector.y * movementSpeed);
 
-        SetMovementAnimation();
         playerRigidbody.velocity = currentMovementVector;
     }
 
-    void SetMovementAnimation()
+    void SetAnimation()
     {
-        if (playerRigidbody.velocity.x == 0 && playerRigidbody.velocity.y == 0)
+        if (playerRigidbody.velocity == Vector2.zero)
         {
-            playerAnimator.SetBool("SRun", false);
-            playerAnimator.SetBool("WRun", false);
-            playerAnimator.SetBool("HorizontalRun", false);
+            switch (currentAnimationState)
+            {
+                case PLAYER_RUN_DOWN:
+                ChangeAnimationState(PLAYER_IDLE_DOWN);
+                break;
+
+                case PLAYER_RUN_HORIZONTAL:
+                ChangeAnimationState(PLAYER_IDLE_HORIZONTAL);
+                break;
+
+                case PLAYER_RUN_UP:
+                ChangeAnimationState(PLAYER_IDLE_UP);
+                break;
+            }
+        }
+        
+        if (playerRigidbody.velocity.y > 0)
+        {
+            ChangeAnimationState(PLAYER_RUN_UP);
         }
 
         if (playerRigidbody.velocity.y < 0)
         {
-            playerAnimator.SetBool("SRun", true);
-            playerAnimator.SetBool("WRun", false);
-            playerAnimator.SetBool("HorizontalRun", false);
+            ChangeAnimationState(PLAYER_RUN_DOWN);
         }
 
-        if (playerRigidbody.velocity.y > 0)
+        if (playerRigidbody.velocity.x != 0 && playerRigidbody.velocity.y == 0)
         {
-            playerAnimator.SetBool("WRun", true);
-            playerAnimator.SetBool("SRun", false);
-            playerAnimator.SetBool("HorizontalRun", false);
-        }
-
-        if (Mathf.Abs(playerRigidbody.velocity.x) > Mathf.Epsilon)
-        {
-            playerAnimator.SetBool("HorizontalRun", true);
-
-            FlipPlayerSprite();
+            ChangeAnimationState(PLAYER_RUN_HORIZONTAL);
+            transform.localScale = new Vector3(Mathf.Sign(playerRigidbody.velocity.x), 1, 1);
         }
     }
 
-    void FlipPlayerSprite()
+    void ChangeAnimationState(string newState)
     {
-        playerHasHorizontalVelocity = Mathf.Abs(playerRigidbody.velocity.x) > Mathf.Epsilon;
+        if (currentAnimationState == newState) { return; }
 
-        if (playerHasHorizontalVelocity)
-        {
-            gameObject.transform.localScale = new Vector2 (Mathf.Sign(playerRigidbody.velocity.x), 1f);
-        }
+        playerAnimator.Play(newState);
+
+        currentAnimationState = newState;
     }
 
     void Interact()
