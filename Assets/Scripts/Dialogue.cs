@@ -5,10 +5,12 @@ using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
-    TextMeshProUGUI textComponent;
+    [SerializeField] DialogueLines dialogueLines;
     [SerializeField] TextMeshProUGUI nextLineIndicator;
-    [SerializeField] string[] dialogueLines;
     [SerializeField] float textSpeed;
+    TextMeshProUGUI textComponent;
+    PlayerController player;
+    string[] textLines;
     int index;
 
     void Awake() 
@@ -16,6 +18,18 @@ public class Dialogue : MonoBehaviour
         nextLineIndicator.gameObject.SetActive(false);
         textComponent = GetComponentInChildren<TextMeshProUGUI>();
         textComponent.text = string.Empty;
+        textLines = dialogueLines.Dialogue;
+        player = FindObjectOfType<PlayerController>();
+    }
+
+    void OnEnable() 
+    {
+        player.LockPlayerMovement();
+    }
+
+    void OnDisable() 
+    {
+        player.UnlockPlayerMovement();
     }
 
     void Start() 
@@ -25,7 +39,7 @@ public class Dialogue : MonoBehaviour
 
     void Update() 
     {
-        if (textComponent.text == dialogueLines[index])
+        if (textComponent.text == textLines[index])
         {
             nextLineIndicator.gameObject.SetActive(true);
         }
@@ -41,7 +55,7 @@ public class Dialogue : MonoBehaviour
     {
         //Type each character 1 by 1
 
-        foreach (char character in dialogueLines[index].ToCharArray())
+        foreach (char character in textLines[index].ToCharArray())
         {
             textComponent.text += character;
             yield return new WaitForSeconds(textSpeed);
@@ -52,7 +66,7 @@ public class Dialogue : MonoBehaviour
     {
         nextLineIndicator.gameObject.SetActive(false);
 
-        if (index < dialogueLines.Length - 1)
+        if (index < textLines.Length - 1)
         {
             index++;
             textComponent.text = string.Empty;
@@ -67,7 +81,7 @@ public class Dialogue : MonoBehaviour
 
     public void SkipLine()
     {
-        if (textComponent.text == dialogueLines[index])
+        if (textComponent.text == textLines[index])
         {
             nextLineIndicator.gameObject.SetActive(true);
             NextLine();
@@ -77,7 +91,7 @@ public class Dialogue : MonoBehaviour
         {
             StopAllCoroutines();
             nextLineIndicator.gameObject.SetActive(true);
-            textComponent.text = dialogueLines[index];
+            textComponent.text = textLines[index];
         }
     }
 

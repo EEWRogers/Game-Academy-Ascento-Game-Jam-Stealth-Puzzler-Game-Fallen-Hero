@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction interactAction;
+
+    bool canMove = true;
     
     void Awake() 
     {
@@ -43,7 +45,10 @@ public class PlayerController : MonoBehaviour
 
     void Update() 
     {
-        Move();
+        if (canMove)
+        {
+            Move();
+        }
         Interact();
         SetAnimation();
 
@@ -102,6 +107,16 @@ public class PlayerController : MonoBehaviour
         playerAnimator.Play(newState);
 
         currentAnimationState = newState;
+    }
+
+    public void LockPlayerMovement()
+    {
+        canMove = false;
+    }
+
+    public void UnlockPlayerMovement()
+    {
+        canMove = true;
     }
 
     void Interact()

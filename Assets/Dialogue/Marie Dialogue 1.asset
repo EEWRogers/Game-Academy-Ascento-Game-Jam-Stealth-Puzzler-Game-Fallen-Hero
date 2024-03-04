@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c08e5da1535ea84d8e8be6a073cb1d4, type: 3}
+  m_Name: Marie Dialogue 1
+  m_EditorClassIdentifier: 
+  dialogue:
+  - "Marie: \u201CSo you ARE alive.\u201D"
+  - "Marie: \u201CFor a while I was wondering if Lucien threw your corpse down here.
+    To admonish my failure to get the job done.\u201D"
+  - "Player: \u201CMarie. You\u2019re still locked up down here?\u201D"
+  - "Marie: \u201CYou PUT me here!\u201D"
+  - "Marie: \u201CYou and your precious company, which could never do anything wrong.\u201D"
+  - "Player: \u201CIt\u2019s true. I was blind to the corruption beneath the surface.
+    At least until this last week.\u201D"
+  - "Player: \u201CI would have thought Lucien would need your skills to get rid
+    of the rest of the board.\u201D"
+  - "Marie: \u201CThe battle is all but over. Your loyal CrystalTime employees are
+    already following his orders.\u201D"
+  - "Marie: \u201C\u2026Lucien has no plans to get his shoes dirty coming down here.
+    Not to help out a loose end.\u201D"
+  - "Marie: \u201CThe guards made that perfectly clear while they were dumping you
+    in there.\u201D"
+  - "Player: \u201C\u2026\u201D"
+  - "Marie: \u201CListen. I was keeping this for the next time that bastard showed
+    his face, but that doesn\u2019t seem likely now.\u201D"
+  - "Marie: \u201CYou might be able to use it to get out of here.\u201D"
+  - Player acquires the makeshift shiv

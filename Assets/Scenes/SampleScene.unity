@@ -213,10 +213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3813b08486a1324fa60b2f0cf6a95c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueLines: {fileID: 11400000, guid: 877c362500daf72498cafa3ab4a84f69, type: 2}
   nextLineIndicator: {fileID: 252157986}
-  dialogueLines:
-  - Hello there, this is a test line.
-  - Kept you waiting, huh?
   textSpeed: 0.05
 --- !u!1 &252157984
 GameObject:
