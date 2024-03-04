@@ -90,7 +90,10 @@ public class PlayerController : MonoBehaviour
     {
         if (interactAction.triggered)
         {
-            currentSceneDialogue.SkipLine();
+            if (currentSceneDialogue.isActiveAndEnabled)
+            {
+                currentSceneDialogue.SkipLine();
+            }
         }
     }
 
